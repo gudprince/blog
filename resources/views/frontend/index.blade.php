@@ -26,12 +26,12 @@
                                     <div class="text-gray-700 mt-2 md:mt-3 font-semibold  text-md" >
                                         {{$trending_post->title}}
                                     </div>
-                                    <p class="text-sm text-gray-600 tracking-wide  mt-4">
-                                        By <span class="font-semibold">{{$trending_post->user->first_name.' '.$trending_post->user->last_name}}</span> 
-                                        <span class="hidden md:inline-block">&bull; {{$trending_post->created_at->diffForHumans()}}</span>
-                                        <i class="ml-4 fa fa-eye"></i> {{$trending_post->post_views ? $trending_post->post_views->count(): 0}}
-                                    </p>
                                 </a>
+                                <p class="text-sm text-gray-600 tracking-wide  mt-4">
+                                By </i> <span class="font-semibold text-blue-700 "><a href="{{route('user.posts',$latest_post->user->id)}}">{{$latest_post->user->first_name.' '.$latest_post->user->last_name}} </a></span> 
+                                    <span class="hidden md:inline-block">&bull; {{$trending_post->created_at->diffForHumans()}}</span>
+                                    <i class="ml-4 fa fa-eye"></i> {{$trending_post->post_views ? $trending_post->post_views->count(): 0}}
+                                </p>
                             </div>
                         </div>
                         @endforeach
@@ -104,7 +104,7 @@
     <section class="mt-4 bg-white">
    
         <div class="container mx-auto px-2 mb-10 " >
-            <h6 class="underline underline-offset-8 py-6 font-bold text-lg md:text-2xl">New Post</h6>
+            <h6 class="underline underline-offset-8 py-6 font-bold text-lg md:text-2xl ">New Post</h6>
             
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-2">
                 <!-- ... -->
@@ -129,12 +129,12 @@
                                         <p class="mt-3 text-gray-600 hidden sm:block">
                                         {{$latest_post->sub_title}}
                                         </p>
-                                        <p class="text-sm text-gray-600 tracking-wide  mt-4">
-                                            By </i> <span class="font-semibold">{{$latest_post->user->first_name.' '.$latest_post->user->last_name}}</span> 
-                                            <span class="hidden md:inline-block">&bull; {{$latest_post->created_at->diffForHumans()}}</span>
-                                            <i class="ml-4 fa fa-eye"></i> {{$latest_post->post_views ? $latest_post->post_views->count() : 0}}
-                                        </p>
                                     </a>
+                                    <p class="text-sm text-gray-600 tracking-wide  mt-4">
+                                        By </i> <span class="font-semibold text-blue-700 "><a href="{{route('user.posts',$latest_post->user->id)}}">{{$latest_post->user->first_name.' '.$latest_post->user->last_name}} </a></span> 
+                                        <span class="hidden md:inline-block">&bull; {{$latest_post->created_at->diffForHumans()}}</span>
+                                        <i class="ml-4 fa fa-eye"></i> {{$latest_post->post_views ? $latest_post->post_views->count() : 0}}
+                                    </p>
                                 </div>
                             </div>
                         </div>

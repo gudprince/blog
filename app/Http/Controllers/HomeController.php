@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\PostView;
 use App\Models\Category;
 
@@ -71,6 +72,21 @@ class HomeController extends Controller
         ->orderBy("id", "DESC")->get()->take(7);
 
         return view('frontend.about-us', $data);
+    }
+
+    public function userPost($id){
+
+        $posts = Post::where('user_id',$id)
+                                    ->orderBy("id", "DESC")->paginate(11);
+        $data['trending_posts'] = Post::where('published',1)->where('menu', 2)
+        ->orderBy("id", "DESC")->get()->take(3);
+
+        $data['posts_count'] = $posts->count();
+         $user = User::find($id);
+        $data['category'] =  $user->first_name.' '.$user->last_name;
+
+        $data['posts'] = $posts;
+        return view('frontend.category_posts', $data);
     }
 
     public function category_posts(Request $request){

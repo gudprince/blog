@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\Category;
 use Hash;
 use  App\Http\Controllers\Controller;
@@ -32,7 +33,8 @@ class UserController extends Controller
     {   
         $response = Gate::inspect('super_admin');
         if ($response->allowed()) {
-            return view('admin.user.create');
+            $data['roles'] = Role::all();
+            return view('admin.user.create', $data);
         }
         else {
             echo $response->message();

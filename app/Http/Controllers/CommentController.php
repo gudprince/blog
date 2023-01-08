@@ -7,8 +7,6 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use App\Events\CommentProcessed;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\PostComment;
 use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller

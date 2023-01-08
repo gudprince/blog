@@ -41,12 +41,20 @@ class BlogController extends Controller
         ]);
         $params = $request->except('_token');
         
-        $params['image'] = $this->uploadOne($request->image, 'blog');
         $params['user_id'] = auth()->user()->id;
         
         
-        $record = Post::create($params);
-        if ($record) {
+        $post = Post::create($params);
+        if ($post) {
+
+            //upload image
+            $image_url = $this->uploadOne($request->image, 'blog');
+
+            $post->photo()->create([
+                'url' =>  $image_url,
+                'imageable_id' => $post->id,
+                'imageable_type'=> 'App\Models\Post',
+            ]);
             
             Session()->flash('message', 'Record Added Successfully');
             return redirect('blog/index');;

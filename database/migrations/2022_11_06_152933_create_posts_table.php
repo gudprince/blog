@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('sub_title');
             $table->longText('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('slug');
             $table->unsignedBigInteger('category_id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

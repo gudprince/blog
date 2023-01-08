@@ -80,6 +80,7 @@ Route::group(['prefix' => 'notification','middleware'=>'auth'], function () {
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('index');
 Route::get('/posts', 'App\Http\Controllers\HomeController@all_posts')->name('all.posts');
+Route::get('/posts/user/{id}', 'App\Http\Controllers\HomeController@userPost')->name('user.posts');
 Route::get('/posts/{slug}', 'App\Http\Controllers\HomeController@category_posts')->name('category.posts');
 Route::get('/post/details/{slug}', 'App\Http\Controllers\HomeController@post_details')->name('post.details');
 Route::get('/contact', 'App\Http\Controllers\HomeController@contact')->name('contact');

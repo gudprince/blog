@@ -60,4 +60,12 @@ class Post extends Model
         return $this->hasMany(PostView::class);
     }
 
+    /**
+     * Get the post's image.
+     */
+    public function photo()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
 }
