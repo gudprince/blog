@@ -11,11 +11,13 @@ class PostComment extends Notification
 {
     use Queueable;
 
+    public $Data;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
+
     public function __construct($Data)
     {
         //
@@ -41,11 +43,11 @@ class PostComment extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)                    
-        ->name($this->Data['name'])
-        ->line($this->Data['body'])
-        ->action($this->Data['offerText'], $this->Data['offerUrl'])
-        ->line($this->Data['thanks']);
+        //return (new MailMessage)                    
+        //->name($this->Data['name'])
+        //->line($this->Data['body'])
+        ////->action($this->Data['offerText'], $this->Data['offerUrl'])
+        //->line($this->Data['thanks']);
     }
 
     /**

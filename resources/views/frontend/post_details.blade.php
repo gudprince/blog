@@ -37,7 +37,7 @@
                     </div>
                     <div class="mb-6 wrapper bg-gray-400 antialiased text-gray-900 " style="border-bottom: 1px solid #9CA3AF">
                         <div>
-                            <img src="{{$post->image}}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">      
+                            <img src="{{$post->image ? $post->image : $post->photo->url}}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">      
                         </div>
                     </div>
                     <div class="mb-8">
@@ -53,7 +53,7 @@
                             <div class="border-b border-gray-200 md:border-none">
                                 <div class="bg-white ">
                                     <a href="{{route('post.details', $related_post->slug)}}">
-                                        <img class="w-full h-48" src="{{asset($related_post->image)}}" alt="Mountain">
+                                        <img class="w-full h-48" src="{{asset($related_post->image ? $related_post->image : $related_post->photo->url)}}" alt="Mountain">
                                     </a>
                                     <div class="px-3 mt-2">
                                         <a href="{{route('post.details', $related_post->slug)}}">

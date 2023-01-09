@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\Image;
 use App\Events\PostProcessed;
 use Illuminate\Support\Facades\Gate;
 use App\Traits\UploadAble;
@@ -39,7 +40,7 @@ class BlogController extends Controller
             'image'  =>  'required|mimes:jpg,jpeg,png|max:1000'
         
         ]);
-        $params = $request->except('_token');
+        $params = $request->except('_token', 'image');
         
         $params['user_id'] = auth()->user()->id;
         
@@ -52,8 +53,8 @@ class BlogController extends Controller
 
             $post->photo()->create([
                 'url' =>  $image_url,
-                'imageable_id' => $post->id,
                 'imageable_type'=> 'App\Models\Post',
+                'imageable_id' => $post->id,
             ]);
             
             Session()->flash('message', 'Record Added Successfully');
@@ -93,9 +94,20 @@ class BlogController extends Controller
         if ($response->allowed()) {
             $params = $request->except('_token', 'image');
             if ($request->image) {
-                $this->deleteOne('blog', $post->image);
 
-                $params['image'] = $this->uploadOne($request->image, 'blog');
+                 //upload image
+            $image_url = $this->uploadOne($request->image, 'blog');
+            $image = Image::where('imageable_id', $post->id)->first();
+            if($image){
+                $image->delete();
+            }
+            
+            Image::Create([
+                'url' =>  $image_url,
+                'imageable_type'=> 'App\Models\Post',
+                'imageable_id' => $post->id
+            ]);
+            
             }
             $post->update($params);
 

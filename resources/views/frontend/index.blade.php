@@ -16,7 +16,7 @@
                                 <div class="md:flex md:flex-wrap md:justify-center">
                                     <div class="">
                                         <a href="{{route('post.details',$trending_post->slug)}}">
-                                            <img src="{{$trending_post->image}}" alt="..." class="shadow rounded-full max-w-full h-24 md:h-48 align-middle border-none" />
+                                            <img src="{{$trending_post->image ? $trending_post->image: $trending_post->photo-url}}" alt="..." class="shadow rounded-full max-w-full h-24 md:h-48 align-middle border-none" />
                                         </a>
                                     </div>
                                 </div>
@@ -28,7 +28,7 @@
                                     </div>
                                 </a>
                                 <p class="text-sm text-gray-600 tracking-wide  mt-4">
-                                By </i> <span class="font-semibold text-blue-700 "><a href="{{route('user.posts',$latest_post->user->id)}}">{{$latest_post->user->first_name.' '.$latest_post->user->last_name}} </a></span> 
+                                By </i> <span class="font-semibold text-blue-700 "><a href="{{route('user.posts',$trending_post->user->id)}}">{{$trending_post->user->first_name.' '.$trending_post->user->last_name}} </a></span> 
                                     <span class="hidden md:inline-block">&bull; {{$trending_post->created_at->diffForHumans()}}</span>
                                     <i class="ml-4 fa fa-eye"></i> {{$trending_post->post_views ? $trending_post->post_views->count(): 0}}
                                 </p>
@@ -42,7 +42,7 @@
                     <div  class="mb-6 md:mb-8 wrapper  antialiased " >
                         <div>
                             <a href="{{route('post.details',$headline_posts->first()->slug)}}">
-                                <img src=" {{$headline_posts->first()->image}}" alt=" random imgee" class="w-full  h-96 object-cover object-center">      
+                                <img src=" {{$headline_posts->first()->image ? $headline_posts->first()->image : $headline_posts->first()->photo->url}}" alt=" random imgee" class="w-full  h-96 object-cover object-center">      
                             </a>
                             <div class="relative px-4 -mt-14 md:-mt-20  ">
                                 <div class="bg-black  p-4 md:p-6 rounded-lg shadow-lg"> 
@@ -51,7 +51,7 @@
                                          {{$headline_posts->first()->title}}
                                         </div>
                                         <p class="text-sm text-white tracking-wide  mt-4">
-                                            By <span class="font-semibold">{{$headline_posts->first()->user->first_name.' '.$headline_posts->first()->user->last_name}}</span> 
+                                            By <span class="font-semibold text-blue-700 ">{{$headline_posts->first()->user->first_name.' '.$headline_posts->first()->user->last_name}}</span> 
                                             <span class="hidden md:inline-block">&bull; {{$headline_posts->first()->created_at->diffForHumans()}}</span>
                                             <i class="ml-4 fa fa-eye"></i> {{$headline_posts->first()->post_views ? $headline_posts->first()->post_views->count() : 0}}
                                         </p>
@@ -63,7 +63,7 @@
 
                     <div class="mb-4 block rounded-full">
                         <a href="{{route('post.details',$headline_posts->last()->slug)}}">
-                            <img src="{{$headline_posts->last()->image}}" alt=" random imgee" class="w-full  h-96 object-cover object-center">      
+                            <img src="{{$headline_posts->last()->image ? $headline_posts->last()->image : $headline_posts->last()->photo->url}}" alt=" random imgee" class="w-full  h-96 object-cover object-center">      
                         </a>
                         <div class="px-3 py-2 md:py-4">
                             <a href="{{route('post.details',$headline_posts->last()->slug)}}">
@@ -71,9 +71,9 @@
                                     {{$headline_posts->last()->title}}
                                 </div>
                                 <p class="text-sm text-gray-600 tracking-wide  mt-4">
-                                    By <span class="font-semibold">{{$trending_post->user->first_name.' '.$trending_post->user->last_name}}</span> 
-                                    <span class="hidden md:inline-block">&bull; {{$trending_post->created_at->diffForHumans()}}</span>
-                                    <i class="ml-4 fa fa-eye"></i> {{$trending_post->post_views ? $trending_post->post_views->count(): 0}}
+                                    By <span class="font-semibold text-blue-700 ">{{$headline_posts->last()->user->first_name.' '.$headline_posts->last()->user->last_name}}</span> 
+                                    <span class="hidden md:inline-block">&bull; {{$headline_posts->last()->created_at->diffForHumans()}}</span>
+                                    <i class="ml-4 fa fa-eye"></i> {{$headline_posts->last()->post_views ? $headline_posts->last()->post_views->count(): 0}}
                                 </p>
                             </a>
                         </div>
@@ -115,7 +115,7 @@
                             <div>
                                 <div class="bg-white py-2 px-1">
                                     <a href="{{route('post.details',$latest_post->slug)}} ">
-                                        <img class="w-full h-20 md:h-64" src="{{$latest_post->image}}" alt="Mountain">
+                                        <img class="w-full h-20 md:h-64" src="{{$latest_post->image ? $latest_post->image : $latest_post->photo->url}}" alt="Mountain">
                                     </a>
                                 </div>
                             </div>

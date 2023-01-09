@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DataTransferObjects\Geolocation;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,18 +49,43 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+     /**
+     * Get he contact that belong to the user.
+     */
+    public function contact()
+    {
+        return $this->hasOne(Contact::class);
+    }
 
+    /**
+     * Get all the posts that belong to the user.
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
-    
 
     /**
-     * The roles that belong to the user.
+     * get the roles that belong to the user.
      */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Get the user's image.
+     */
+    public function photo()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /**
+     * The all the Geolocations that belong to the user.
+     */
+    public function userGeolocation ()
+    {
+        return $this->hasMany(UserGeolocation::class);
     }
 }

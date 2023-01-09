@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Notifications\PostComment;
 use Illuminate\Notifications\Notifiable;
-use Notification;
+use Illuminate\Support\Facades\Notification;
 
 class SendCommentNotification
 {
@@ -33,12 +33,22 @@ class SendCommentNotification
         $notify_data['post_id'] = $event->post->id;
         $notify_data['post_title'] = $event->post->title;
         $notify_data['post_slug'] = $event->post->slug;
-        $notify_data['commenter_name'] = $event->commenter_name;
+        $notify_data['commenter_name'] = $event->post->user->first_name.' '.$event->post->user->last_name;
         $notify_data['post_url'] = route('post.details', $event->post->slug);
         $notify_data['message'] = 'commented on your post:';
 
         $userSchema = $event->user;
         
         Notification::send($userSchema, new PostComment($notify_data));
+    }
+
+     /**
+     * Determine if events and listeners should be automatically discovered.
+     *
+     * @return bool
+     */
+    public function shouldDiscoverEvents()
+    {
+        return true;
     }
 }

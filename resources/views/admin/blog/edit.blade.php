@@ -18,7 +18,7 @@ Blog
             </div>
             <div class="py-4 d-none d-md-block">
                 <h3>Post image </h3>
-                <img class="img-fluid" src="{{asset($post->image)}}" alt="product image">
+                <img class="img-fluid" src="{{asset($post->photo ? $post->photo->url : $post->image)}}" alt="product image">
             </div>
         </div>
         <div class="col-md-9">

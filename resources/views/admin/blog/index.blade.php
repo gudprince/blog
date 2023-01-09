@@ -56,7 +56,7 @@ Blog
                                     <td class="text-capitalize">{{ $post->user->first_name.' '.$post->user->last_name}}</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            @can('support_team', $post)
+                                            @can('can_edit', $post)
                                             <a href="{{ route('blog.edit', $post->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                             @endcan
                                             @can('editor')
@@ -140,7 +140,7 @@ Blog
                                                 </div>
                                             </div>
                                             @endcan
-                                            @can('support_team', $post)
+                                            @can('can_delete', $post)
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{$post->id}}">
                                             <i class="fa fa-trash"></i>
                                             </button>

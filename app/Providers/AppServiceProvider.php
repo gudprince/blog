@@ -9,6 +9,8 @@ use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
+use App\Contracts\Geolocator;
+use App\Services\Geolocator\Ipinfo;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Geolocator::class, IpInfo::class);
     }
 
     /**
@@ -57,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
             return $user->user_type == 'super_admin' ||  $user->user_type == 'editor' 
             ||  $user->user_type == 'admin' || $post->user_id == $user->id    
                 ? Response::allow()
-                : Response::deny('Access Denied, You must be a Super administrator.');
+                : Response::deny('Access Denied, You do not access to delete this post.');
         });
 
         
@@ -72,14 +74,14 @@ class AppServiceProvider extends ServiceProvider
             return $user->user_type == 'super_admin' ||  $user->user_type == 'editor' 
             ||  $user->user_type == 'admin' || $post->user_id == $user->id    
                 ? Response::allow()
-                : Response::deny('Access Denied, You must be a Super administrator.');
+                : Response::deny('Access Denied, You do not access to update this post.');
         });
 
         Gate::define('can_edit', function (User $user, Post $post) {
             return $user->user_type == 'super_admin' ||  $user->user_type == 'editor' 
             ||  $user->user_type == 'admin' || $post->user_id == $user->id    
                 ? Response::allow()
-                : Response::deny('Access Denied, You must be a Super administrator.');
+                : Response::deny('Access Denied, You do not access to edit this post.');
         });
     }
 }

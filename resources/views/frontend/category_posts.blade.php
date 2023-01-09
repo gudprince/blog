@@ -15,7 +15,7 @@
                     <div  class="mb-6 md:mb-8 wrapper  antialiased " >
                         <div>
                             <a href="{{route('post.details', $posts->first()->slug)}}">
-                                <img src="{{$posts->first()->image}}" alt=" random imgee" class="h-[350px] md:h-[530px] w-full object-cover object-center">      
+                                <img src="{{$posts->first()->image ? $posts->first()->image : $posts->first()->photo->url}}" alt=" random imgee" class="h-[350px] md:h-[530px] w-full object-cover object-center">      
                             </a>
                             <div class="relative px-4 -mt-14 md:-mt-20  ">
                                 <div class="bg-black  p-4 md:p-6 rounded-lg shadow-lg"> 
@@ -42,7 +42,7 @@
                                     <div class="">
                                         <div class="">
                                             <a href="{{route('post.details', $post->slug)}}">
-                                                <img src="{{$post->image}}" alt="..." class="h-24 md:h-[300px] w-full" />
+                                                <img src="{{$post->image ? $post->image : $post->photo->url}}" alt="..." class="h-24 md:h-[300px] w-full" />
                                             </a>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                     <div class="md:flex md:flex-wrap md:justify-center">
                                         <div class="">
                                             <a href="{{route('post.details', $trending_post->slug)}}">
-                                                <img src="{{$trending_post->image}}" alt="..." class="shadow rounded-full max-w-full h-24 md:h-60 align-middle border-none" />
+                                                <img src="{{$trending_post->image ? $trending_post->image : $trending_post->photo->url}}" alt="..." class="shadow rounded-full max-w-full h-24 md:h-60 align-middle border-none" />
                                             </a>
                                         </div>
                                     </div>

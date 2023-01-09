@@ -36,6 +36,7 @@ class CommentController extends Controller
             }
 
             $user = User::find($post->user_id);
+            
             CommentProcessed::dispatch($post, $user, $response['name']);
 
             $response['content'] = $data->content;
